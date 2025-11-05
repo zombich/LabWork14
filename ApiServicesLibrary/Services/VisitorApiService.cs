@@ -12,14 +12,24 @@ namespace ApiServicesLibrary.Services
 
         private readonly JsonSerializerOptions _jsonOptions = jsonOptions;
 
-        public async Task<IEnumerable<Visitor>?> GetVisitors()
+        public async Task<IEnumerable<Visitor>?> GetVisitorsAsync()
         {
             var response = await _client.GetAsync("visitors/");
             var content = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<IEnumerable<Visitor>?>(content, _jsonOptions);
         }
 
-        public async Task UpdateVisitor(Visitor visitor)
+        public async Task<Film> GetFilmByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task RemoveFilmAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task UpdateVisitorAsync(Visitor visitor)
         {
             var json = JsonSerializer.Serialize(visitor, _jsonOptions);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -27,7 +37,7 @@ namespace ApiServicesLibrary.Services
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task<Visitor?> AddVisitor(Visitor visitor)
+        public async Task<Visitor?> AddVisitorAsync(Visitor visitor)
         {
             var json = JsonSerializer.Serialize(visitor, _jsonOptions);
             var content = new StringContent(json, Encoding.UTF8, "application/json");

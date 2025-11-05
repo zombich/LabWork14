@@ -54,7 +54,7 @@ var jsonOptions = new JsonSerializerOptions()
 
 var visitorService = new VisitorApiService(client, jsonOptions);
 
-var visitors = await visitorService.GetVisitors();
+var visitors = await visitorService.GetVisitorsAsync();
 
 foreach (var v in visitors)
     Console.WriteLine($"{v.Name} - {v.Phone}");
@@ -65,14 +65,14 @@ var visitor = new Visitor()
     Name = "coolvisitor"
 };
 
-visitor = await visitorService.AddVisitor(visitor);
+visitor = await visitorService.AddVisitorAsync(visitor);
 Console.WriteLine("Добавлен посетитель");
 
 Console.WriteLine("Нажмите Enter чтобы продолжить...");
 Console.ReadKey();
 
 visitor.Name = "updatedvisitor";
-await visitorService.UpdateVisitor(visitor);
+await visitorService.UpdateVisitorAsync(visitor);
 
 Console.WriteLine("Обновлен посетитель");
 
